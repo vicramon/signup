@@ -1,0 +1,23 @@
+%article#signup
+  %h2 Signup
+
+  - if flash[:signup]
+    .alert= flash[:signup]
+
+  = form_for user do |f|
+
+    %dl
+      = f.label :name
+      = f.text_field :name
+
+    %dl
+      = f.label :email
+      = f.text_field :email
+
+    %dl
+      = f.label "Choose a Password"
+      = f.password_field :password
+
+    %dl
+      = label_tag nil
+      = f.submit "Sign up"
