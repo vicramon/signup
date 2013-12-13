@@ -1,0 +1,18 @@
+%article#login
+  %h2 Login
+
+  - if flash[:alert]
+    .alert= flash[:alert]
+
+  = form_tag sessions_path do
+
+    %dl
+      = label_tag "Email"
+      = text_field_tag :email
+
+    %dl
+      = label_tag "Password"
+      = password_field_tag :password
+
+    %dl
+      = submit_tag "Sign In"
