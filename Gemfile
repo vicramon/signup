@@ -13,6 +13,7 @@ gem 'rails_12factor'
 gem 'sass-rails', '~> 4.0.0'
 gem 'thin'
 gem 'uglifier', '>= 1.3.0'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 group :test, :development do
   gem 'pry'
