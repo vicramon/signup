@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def create
     if user && user.authenticate(params[:password])
       sign_in(user)
-      redirect_to :dashboard
+      redirect_to [:dashboard, :index]
     else
       flash.alert = "Your email and password do not match."
       render :new
