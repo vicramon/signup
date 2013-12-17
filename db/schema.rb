@@ -11,10 +11,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213214828) do
+ActiveRecord::Schema.define(version: 20131216161356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contacts", force: true do |t|
+    t.string   "email"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contacts", ["group_id"], name: "index_contacts_on_group_id", using: :btree
+
+  create_table "fields", force: true do |t|
+    t.string   "name"
+    t.string   "kind"
+    t.boolean  "required",   default: false
+    t.integer  "form_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fields", ["form_id"], name: "index_fields_on_form_id", using: :btree
+
+  create_table "forms", force: true do |t|
+    t.integer  "account_id"
+    t.string   "name"
+    t.text     "description"
+    t.date     "date"
+    t.time     "starts"
+    t.time     "ends"
+    t.boolean  "send_reminders"
+    t.integer  "reminder_days_before"
+    t.boolean  "notify_admin_of_new_signup"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "forms", ["account_id"], name: "index_forms_on_account_id", using: :btree
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "groups", ["account_id"], name: "index_groups_on_account_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
