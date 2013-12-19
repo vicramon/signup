@@ -5,7 +5,7 @@ development:
   pool: 5
   host: localhost
 
-test:
+test: &test
   adapter: postgresql
   encoding: unicode
   database: signup_test
@@ -17,3 +17,6 @@ production:
   encoding: unicode
   database: signup_production
   pool: 5
+
+cucumber:
+  <<: *test
