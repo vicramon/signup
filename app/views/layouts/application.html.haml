@@ -1,10 +1,23 @@
 !!!
 %html
 %head
-  %title Signup
+  %title Signup Builder
   = stylesheet_link_tag    "application"
   = javascript_include_tag "application"
   = csrf_meta_tags
 
 %body
-  = yield
+  %header
+    #inside_header
+      %nav
+        - if current_user
+          = link_to "Logout", :sign_out
+        - else
+          = link_to "Home", :root
+          = link_to "Sign In", :sign_in
+      = link_to :root do
+        = image_tag 'logo.png'
+
+  #container
+    %section#main
+      = yield

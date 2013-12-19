@@ -1,0 +1,100 @@
+@import 'whitespace-reset'
+
+body
+  font-family: "Myriad Pro"
+  font-size: 17px
+  color: #333
+
+a, a:active, a:hover, a:visited
+  color: #45A3D7
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+input[type='submit'], button
+  border: none
+  padding: 10px 40px
+  font-family: "Myriad Pro"
+  font-weight: 600
+  font-size: 17px
+  cursor: pointer
+  &.green
+    background: #00FF00
+    &:hover
+      background: #73FF73
+  &.orange
+    background: #FF8000
+  &.blue
+    background: #73B9FF
+    &:hover
+      background: #99CCFF
+  &.gray
+    background: #BBBBBB
+
+.big
+  font-size: 23px
+  width: 290px
+  font-weight: normal
+  padding: 16px 30px
+
+input[type='text'], input[type='password'], textarea
+  width: 270px
+  font-size: 17px
+  font-family: "Myriad Pro"
+  padding: 3px 3px 2px
+  border: 1px solid #2693FF
+
+label
+  width: 150px
+  padding: 0 4px 15px 0
+  color: #333
+  text-align: right
+  display: inline-block
+
+
+#container
+  width: 85%
+  margin: 0 auto
+
+header
+  #inside_header
+    width: 85%
+    margin: 0 auto
+    padding: 20px 15px 6px
+    border-bottom: 1px solid #ddd
+  nav
+    margin-top: 8px
+    float: right
+    a + a
+      margin-left: 30px
+
+section#main
+  margin-top: 20px
+  h1
+    font-size: 22px
+    padding-bottom: 8px
+  h2
+    font-size: 20px
+    font-weight: bold
+    padding-bottom: 8px
+
+section#home
+  margin: 0 auto
+  width: 900px
+  header
+    text-align: center
+    padding-top: 20px
+    h1
+      font-weight: bold
+      font-size: 33px
+      padding-bottom: 10px
+      font-family: "Cabin-Bold"
+    h2
+      font-size: 24px
+      font-family: "Cabin-Regular"
+      color: #535353
+      font-weight: normal
+      padding-bottom: 35px
+    #buttons
+      button + button
+        margin-left: 25px
