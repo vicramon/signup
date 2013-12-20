@@ -9,4 +9,7 @@ class User < ActiveRecord::Base
            password_confirmation: 'temp')
   end
 
+  def signups
+  end
+
 end

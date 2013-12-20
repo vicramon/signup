@@ -11,15 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219233044) do
+ActiveRecord::Schema.define(version: 20131220001634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "accounts", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "contacts", force: true do |t|
     t.string   "email"
@@ -41,8 +36,16 @@ ActiveRecord::Schema.define(version: 20131219233044) do
 
   add_index "fields", ["form_id"], name: "index_fields_on_form_id", using: :btree
 
-  create_table "forms", force: true do |t|
+  create_table "groups", force: true do |t|
+    t.string   "name"
     t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "groups", ["account_id"], name: "index_groups_on_account_id", using: :btree
+
+  create_table "signups", force: true do |t|
     t.string   "name"
     t.text     "description"
     t.date     "date"
@@ -54,17 +57,6 @@ ActiveRecord::Schema.define(version: 20131219233044) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "forms", ["account_id"], name: "index_forms_on_account_id", using: :btree
-
-  create_table "groups", force: true do |t|
-    t.string   "name"
-    t.integer  "account_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "groups", ["account_id"], name: "index_groups_on_account_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
