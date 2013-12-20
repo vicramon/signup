@@ -1,0 +1,13 @@
+= content_for :nested_layout do
+  %section#new_signup
+    %h1 Create a New Signup
+
+    %nav
+      %li.selected= link_to 'Basic Info', '#'
+      %li= link_to 'Slots', '#'
+      %li= link_to 'Form Fields', '#'
+      %li= link_to 'People', '#'
+
+    = yield
+
+= render template: 'layouts/application'
