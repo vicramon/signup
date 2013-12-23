@@ -1,6 +1,6 @@
 Fabricator :form do
-  name 'Soccer Game'
-  description "It's gonna be a good one!"
+  name { Faker::Lorem.words(3).join(' ').capitalize }
+  description { Faker::Lorem.paragraph }
   date Date.tomorrow
   starts_at 3.hours.from_now
   ends_at 6.hours.from_now
