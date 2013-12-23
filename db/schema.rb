@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131220002518) do
+ActiveRecord::Schema.define(version: 20131223175752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contacts", force: true do |t|
     t.string   "email"
@@ -36,6 +42,23 @@ ActiveRecord::Schema.define(version: 20131220002518) do
 
   add_index "fields", ["form_id"], name: "index_fields_on_form_id", using: :btree
 
+  create_table "forms", force: true do |t|
+    t.integer  "account_id"
+    t.string   "name"
+    t.text     "description"
+    t.date     "date"
+    t.time     "starts_at"
+    t.time     "ends_at"
+    t.boolean  "send_reminders"
+    t.integer  "reminder_days_before"
+    t.boolean  "notify_admin_of_new_signup"
+    t.boolean  "published",                  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "forms", ["account_id"], name: "index_forms_on_account_id", using: :btree
+
   create_table "groups", force: true do |t|
     t.string   "name"
     t.integer  "account_id"
@@ -45,18 +68,15 @@ ActiveRecord::Schema.define(version: 20131220002518) do
 
   add_index "groups", ["account_id"], name: "index_groups_on_account_id", using: :btree
 
-  create_table "signups", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.date     "date"
-    t.time     "starts_at"
-    t.time     "ends_at"
-    t.boolean  "send_reminders"
-    t.integer  "reminder_days_before"
-    t.boolean  "notify_admin_of_new_signup"
+  create_table "memberships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "memberships", ["account_id"], name: "index_memberships_on_account_id", using: :btree
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -65,9 +85,9 @@ ActiveRecord::Schema.define(version: 20131220002518) do
     t.string   "remember_token"
     t.string   "reset_password_token"
     t.string   "session_token"
+    t.boolean  "temporary",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "temporary",            default: false
   end
 
 end

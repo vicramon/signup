@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :remember_token
       t.string :reset_password_token
       t.string :session_token
+      t.boolean :temporary, default: false
 
       t.timestamps
     end

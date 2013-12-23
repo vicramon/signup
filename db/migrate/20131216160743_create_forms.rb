@@ -5,11 +5,12 @@ class CreateForms < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.date :date
-      t.time :starts
-      t.time :ends
+      t.time :starts_at
+      t.time :ends_at
       t.boolean :send_reminders
       t.integer :reminder_days_before
       t.boolean :notify_admin_of_new_signup
+      t.boolean :published, default: false
 
       t.timestamps
     end

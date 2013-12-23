@@ -4,7 +4,7 @@ Signup::Application.routes.draw do
   resources :dashboard, only: [:index]
   resources :users, only: [:new, :create]
 
-  resources :signups do
+  resources :forms do
     get 'basic-info', to: 'signups#basic_info'
     get 'slots'
     get 'form-fields', to: 'signups#form_fields'
