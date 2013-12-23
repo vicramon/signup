@@ -17,6 +17,8 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 group :test, :development do
   gem 'pry'
+  gem 'launchy'
+  gem 'faker'
 end
 
 group :development do
@@ -28,7 +30,6 @@ end
 
 group :test do
   gem 'cucumber-rails', require: false
-  gem 'cucumber'
   gem 'database_cleaner'
   gem 'poltergeist', require: 'capybara/poltergeist'
   gem 'selenium-webdriver'
