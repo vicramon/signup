@@ -1,7 +1,7 @@
 Feature: Create signup
 
-  Scenario: Temporary user completes a signup
-    Given I visit the home page
+  Scenario: Signed in user completes a signup
+    Given I am signed in
     And I follow "Get Started"
     When I fill in the Basic Info
     And I click to continue
