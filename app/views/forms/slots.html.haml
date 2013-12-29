@@ -4,3 +4,29 @@
 
   If you need people to signup for specific slots then create them here. If not, then just
   = link_to "continue.", [form, :fields]
+
+  %table#slots
+    %tr
+      %th Slot Name
+      %th Maxmium Allowed
+    = f.fields_for :slots do |s|
+      %tr
+        %td
+          = s.text_field :name
+        %td
+          = s.select :max, options_for_select(@max_options), class: 'slot_max'
+    %tr
+      %td{ class: 'add_slots' }
+        = link_to '+ Add more slots', '#'
+      %td
+
+
+  %br
+  %br
+  = f.submit "Continue &raquo;".html_safe, class: 'green'
+
+:javascript
+  $('.add_slots a').click( function() {
+    alert('add slots')
+    return false;
+  })

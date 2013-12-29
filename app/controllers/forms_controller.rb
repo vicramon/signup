@@ -23,6 +23,11 @@ class FormsController < ApplicationController
     redirect_to [form, :slots]
   end
 
+  def slots
+    3.times { form.slots.build }
+    @max_options = ['unlimited'].concat((1..50).to_a)
+  end
+
   private
 
   def create_temporary_if_no_user
