@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:current_form_id] = nil
     sign_out
     redirect_to :root
   end

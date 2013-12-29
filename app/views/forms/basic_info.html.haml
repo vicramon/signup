@@ -1,1 +1,34 @@
-%h2 Basic Info
+= form_for form do |f|
+
+  %h2 Details
+
+  %dl
+    = f.label :name, "Title:"
+    = f.text_field :name
+
+  %dl
+    = f.label :description, "Description:", class: 'textarea_label'
+    = f.text_area :description, rows: 3
+
+  %br
+  %h2 Date and Time
+
+  %dl
+    = f.label :date, "Date:"
+    = f.date_select :date, order: [:month, :day, :year]
+
+  %dl
+    = f.label :starts_at, "Starts:"
+    = f.time_select :starts_at, ampm: true, minute_step: 15
+
+  %dl
+    = f.label :ends_at, "Ends:"
+    = f.time_select :ends_at, ampm: true, minute_step: 15
+
+  %br
+  %dl
+    = label_tag nil
+    = f.submit "Continue &raquo;".html_safe, class: 'green'
+
+:javascript
+  new LiveValidation('form_name').add( Validate.Presence, { failureMessage: "required" } );

@@ -9,10 +9,13 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   def self.create_temporary
-    create(temporary: true,
+    user = create(temporary: true,
            email: random_email,
            password: 'temp',
            password_confirmation: 'temp')
+    account = Account.create(temporary: true)
+    account.add_member(user)
+    user
   end
 
 end

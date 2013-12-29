@@ -5,10 +5,11 @@ Signup::Application.routes.draw do
   resources :users, only: [:new, :create]
 
   resources :forms do
-    get 'basic-info', to: 'signups#basic_info'
-    get 'slots'
-    get 'form-fields', to: 'signups#form_fields'
-    get 'people'
+    get 'basic_info', on: :collection
+    get 'basic_info'
+    match 'slots', via: [:get, :patch]
+    match 'fields', via: [:get, :patch]
+    match 'people', via: [:get, :patch]
   end
 
   get 'sign_out', to: 'sessions#destroy', as: 'sign_out'
