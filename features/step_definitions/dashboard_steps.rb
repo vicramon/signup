@@ -1,9 +1,9 @@
 Given(/^I am signed in$/) do
-  user = Fabricate(:user)
+  @user = Fabricate(:user)
   @account = Fabricate(:account)
-  @account.add_member(user)
+  @account.add_member(@user)
   visit sign_in_path
-  fill_in :email, with: user.email
+  fill_in :email, with: @user.email
   fill_in :password, with: 'password'
   click_button "Sign In"
 end

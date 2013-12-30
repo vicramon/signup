@@ -12,14 +12,14 @@ class FormsController < ApplicationController
   def edit; redirect_to [form, :basic_info]; end
 
   def create
-    form = Form.create(form_params)
+    form = Form.create(form_parameters)
     form.account = current_user.accounts.first
     form.save
     redirect_to [form, :slots]
   end
 
   def update
-    form.update_attributes(form_params)
+    form.update_attributes(form_parameters)
     redirect_to [form, :slots]
   end
 
@@ -30,16 +30,12 @@ class FormsController < ApplicationController
   end
 
   def update_slots
-    form.update_attributes(form_params)
+    form.update_attributes(form_parameters)
     redirect_to [form, :fields]
   end
 
-  def fields
-    @required_options = [['no', false], ['yes', true]]
-  end
-
   def update_fields
-    form.update_attributes(form_params)
+    form.update_attributes(form_parameters)
     redirect_to [form, :people]
   end
 
@@ -53,7 +49,7 @@ class FormsController < ApplicationController
     sessions[:current_form]
   end
 
-  def form_params
+  def form_parameters
     params.require(:form).permit(
       :name,
       :description,
@@ -65,7 +61,7 @@ class FormsController < ApplicationController
       :notify_admin_of_new_signup,
       :published,
       slots_attributes: [:id, :name, :max],
-      fields_attributes: [:id, :name, :required]
+      fields_attributes: [:id, :name, :required],
     )
   end
 

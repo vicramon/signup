@@ -5,6 +5,9 @@ body
   font-size: 17px
   color: #333
 
+.hidden
+  display: none
+
 a, a:active, a:hover, a:visited
   color: #0080FF
   text-decoration: none
@@ -145,7 +148,7 @@ section#new_signup
         background: #F4F4F4
         a
           color: #333
-  table#slots
+  table#slots, table#fields
     padding: 25px 0 0 0
     th
       padding: 0 0 7px 0
@@ -157,7 +160,7 @@ section#new_signup
       padding-top: 15px
     input[type='text']
       width: 220px
-    select
+    select, input[type='checkbox']
       margin: 0 0 0 20px
 
 section#dashboard
@@ -181,3 +184,16 @@ section#dashboard
   article#published
 
   article#drafted
+
+article#new_custom_field
+  margin: 30px 0 40px 0
+  padding: 20px 40px
+  width: 400px
+  background: #eee
+  border-radius: 5px
+  label
+    text-align: left
+    width: auto
+    display: inline-block
+  input + label
+    padding-left: 10px

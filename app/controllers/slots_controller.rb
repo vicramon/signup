@@ -1,4 +1,4 @@
-class SlotsController < ApplicationController
+class SlotsController < AuthenticatedController
 
   def destroy
     slot = Slot.find(params[:id])

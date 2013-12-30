@@ -1,3 +1,3 @@
 class Field < ActiveRecord::Base
-  belongs_to :signup
+  belongs_to :form
 end

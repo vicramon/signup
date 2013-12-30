@@ -1,6 +1,40 @@
-= form_for form do |f|
+%h2 Form Fields
 
-  %h2 Form Fields
+Create fields to request specific information from people. If you don't need anything other the name and email then just
+= link_to "continue.", [form, :people]
 
-  Create fields to request specific information from people. If you don't need anything other the name and email then just
-  = link_to "continue.", [form, :people]
+= form_for form, url: form_update_fields_path(form) do |f|
+  %table#fields
+    %tr
+      %th Field Name
+      %th Required
+      %th
+    = f.fields_for :fields do |f|
+      %tr
+        %td
+          = f.text_field :name
+        %td
+          = f.select :required, options_for_select(@required_options, f.object.required)
+        %td
+          - if f.object.persisted?
+            = link_to 'remove', field_path(f.object), method: :delete
+
+
+%article#new_custom_field
+  = form_for form.fields.build do |f|
+    %h3 Add custom form field
+    %br
+    = f.hidden_field :form_id, value: form.id
+    = f.label :name
+    = f.text_field :name, style: 'width: 170px'
+    = f.label :required
+    = f.select :required, @required_options
+    %br
+      = f.submit 'Add custom field', class: 'blue'
+
+= submit_tag "Save & Continue &raquo;".html_safe, class: 'green', id: 'main_submit'
+
+:javascript
+  $('#main_submit').click( function() {
+    $('form').first().submit()
+  })
