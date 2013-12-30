@@ -1,4 +1,4 @@
-= form_for form do |f|
+= form_for form, url: form_update_slots_path(form) do |f|
 
   %h2 Slots
 
@@ -8,25 +8,31 @@
   %table#slots
     %tr
       %th Slot Name
-      %th Maxmium Allowed
+      %th Signups Allowed
+      %th
     = f.fields_for :slots do |s|
-      %tr
+      %tr{ class: ('hidden' if s.index > @hide_index) }
         %td
           = s.text_field :name
         %td
-          = s.select :max, options_for_select(@max_options), class: 'slot_max'
+          = s.select :max, options_for_select(@max_options, s.object.max), class: 'slot_max'
+        %td
+          - if s.object.persisted?
+            = link_to 'remove', slot_path(s.object), method: :delete
     %tr
       %td{ class: 'add_slots' }
         = link_to '+ Add more slots', '#'
       %td
 
-
   %br
   %br
-  = f.submit "Continue &raquo;".html_safe, class: 'green'
+  = f.submit "Save & Continue &raquo;".html_safe, class: 'green'
 
 :javascript
   $('.add_slots a').click( function() {
-    alert('add slots')
+    $('.hidden').show()
     return false;
   })
+
+:css
+  .hidden { display: none; }

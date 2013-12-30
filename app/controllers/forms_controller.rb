@@ -11,11 +11,6 @@ class FormsController < ApplicationController
   def new; redirect_to basic_info_forms_path; end
   def edit; redirect_to [form, :basic_info]; end
 
-  def update
-    form.update_attributes(form_parameters)
-    redirect_to [form, :slots]
-  end
-
   def create
     form = Form.create(form_parameters)
     form.account = current_user.accounts.first
@@ -23,9 +18,20 @@ class FormsController < ApplicationController
     redirect_to [form, :slots]
   end
 
+  def update
+    form.update_attributes(form_parameters)
+    redirect_to [form, :slots]
+  end
+
   def slots
-    3.times { form.slots.build }
-    @max_options = ['unlimited'].concat((1..50).to_a)
+    @hide_index = 2 + form.slots.size
+    8.times { form.slots.build }
+    @max_options = [['unlimited',0]].concat((1..50).to_a)
+  end
+
+  def update_slots
+    form.update_attributes(form_parameters)
+    redirect_to [form, :fields]
   end
 
   private
@@ -39,7 +45,7 @@ class FormsController < ApplicationController
   end
 
   def form_parameters
-    params.require(:form).permit(:name, :description, :starts_at, :ends_at, :date, :send_reminders, :reminder_days_before, :notify_admin_of_new_signup, :published)
+    params.require(:form).permit(:name, :description, :starts_at, :ends_at, :date, :send_reminders, :reminder_days_before, :notify_admin_of_new_signup, :published, slots_attributes: [:id, :name, :max])
   end
 
 end

@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
     user
   end
 
+  def has_access?(form)
+    forms.map(&:id).include? form.id
+  end
+
 end
