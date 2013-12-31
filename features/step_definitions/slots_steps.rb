@@ -8,7 +8,7 @@ end
 
 When(/^I add slots$/) do
   all("input[type='text']").first.set "great slot"
-  find("input[type='submit']").click
+  find("#new_slot input[type='submit']").click
 end
 
 Then(/^I should see those slots$/) do

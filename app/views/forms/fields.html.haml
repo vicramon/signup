@@ -1,6 +1,6 @@
 %h2 Form Fields
 
-Create fields to request specific information from people. If you don't need anything other the name and email then just
+If you need specific information from people then create custom fields. Otherwise
 = link_to "continue.", [form, :people]
 
 = form_for form, url: form_update_fields_path(form) do |f|
@@ -32,9 +32,9 @@ Create fields to request specific information from people. If you don't need any
     = f.label :required, "Required:"
     = f.select :required, @required_options
     %br
-      = f.submit 'Add custom field', class: 'blue'
+      = f.submit 'Add Custom Field', class: 'blue'
 
-= submit_tag "Save & Continue &raquo;".html_safe, class: 'green', id: 'main_submit'
+= submit_tag "Continue &raquo;".html_safe, class: 'green', id: 'main_submit'
 
 :javascript
   $('#main_submit').click( function() {

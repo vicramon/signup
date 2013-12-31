@@ -24,8 +24,6 @@ class FormsController < ApplicationController
   end
 
   def slots
-    @hide_index = 2 + form.slots.size
-    8.times { form.slots.build }
     @max_options = [['unlimited',0]].concat((1..50).to_a)
   end
 

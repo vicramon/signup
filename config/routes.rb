@@ -18,7 +18,7 @@ Signup::Application.routes.draw do
     patch 'update_people'
   end
 
-  resources :slots, only: [:destroy]
+  resources :slots, only: [:create, :destroy]
   resources :fields, only: [:create, :destroy]
 
   get 'sign_out', to: 'sessions#destroy', as: 'sign_out'

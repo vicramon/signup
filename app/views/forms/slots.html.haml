@@ -1,35 +1,37 @@
-= form_for form, url: form_update_slots_path(form) do |f|
+%h2 Slots
 
-  %h2 Slots
+If you need people to signup for specific slots then create them here. Otherwise
+= link_to "continue.", [form, :fields]
 
-  If you need people to signup for specific slots then create them here. If not, then just
-  = link_to "continue.", [form, :fields]
+- if form.slots.present?
+  = form_for form, url: form_update_slots_path(form) do |f|
+    %table#slots
+      %tr
+        %th Slot Name
+        %th Signups Allowed
+        %th
+      = f.fields_for :slots do |s|
+        %tr
+          %td= s.text_field :name
+          %td= s.select :max, options_for_select(@max_options, s.object.max), class: 'slot_max'
+          %td= link_to 'remove', slot_path(s.object), method: :delete
 
-  %table#slots
-    %tr
-      %th Slot Name
-      %th Signups Allowed
-      %th
-    = f.fields_for :slots do |s|
-      %tr{ class: ('hidden' if s.index > @hide_index) }
-        %td
-          = s.text_field :name
-        %td
-          = s.select :max, options_for_select(@max_options, s.object.max), class: 'slot_max'
-        %td
-          - if s.object.persisted?
-            = link_to 'remove', slot_path(s.object), method: :delete
-    %tr
-      %td{ class: 'add_slots' }
-        = link_to '+ Add more slots', '#'
-      %td
+%article#new_custom_field
+  = form_for form.slots.build do |f|
+    %h3 Create slot
+    %br
+    = f.hidden_field :form_id, value: form.id
+    = f.label :name, "Slot name:"
+    = f.text_field :name, style: 'width: 170px'
+    = f.label :required, "People allowed:"
+    = f.select :max, @max_options
+    %br
+      = f.submit 'Create Slot', class: 'blue'
 
-  %br
-  %br
-  = f.submit "Save & Continue &raquo;".html_safe, class: 'green'
+
+= submit_tag "Continue &raquo;".html_safe, class: 'green', id: 'main_submit'
 
 :javascript
-  $('.add_slots a').click( function() {
-    $('.hidden').show()
-    return false;
+  $('#main_submit').click( function() {
+    $('form').first().submit()
   })
