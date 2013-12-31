@@ -9,15 +9,17 @@ Create fields to request specific information from people. If you don't need any
       %th Field Name
       %th Required
       %th
+    %tr
+      %td Name
+      %td yes
+    %tr
+      %td Email
+      %td yes
     = f.fields_for :fields do |f|
       %tr
-        %td
-          = f.text_field :name
-        %td
-          = f.select :required, options_for_select(@required_options, f.object.required)
-        %td
-          - if f.object.persisted?
-            = link_to 'remove', field_path(f.object), method: :delete
+        %td= f.text_field :name
+        %td= f.select :required, options_for_select(@required_options, f.object.required)
+        %td.remove= link_to 'remove', field_path(f.object), method: :delete
 
 
 %article#new_custom_field
@@ -25,9 +27,9 @@ Create fields to request specific information from people. If you don't need any
     %h3 Add custom form field
     %br
     = f.hidden_field :form_id, value: form.id
-    = f.label :name
+    = f.label :name, "Name:"
     = f.text_field :name, style: 'width: 170px'
-    = f.label :required
+    = f.label :required, "Required:"
     = f.select :required, @required_options
     %br
       = f.submit 'Add custom field', class: 'blue'

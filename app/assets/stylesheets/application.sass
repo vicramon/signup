@@ -152,16 +152,25 @@ section#new_signup
     padding: 25px 0 0 0
     th
       padding: 0 0 7px 0
+      text-align: left
     tr
       height: 32px
+      td:first-of-type
+        min-width: 130px
+      td + td
+        text-align: center
     .add_slots
       text-align: center
       margin-top: 15px
       padding-top: 15px
     input[type='text']
       width: 220px
-    select, input[type='checkbox']
+    input[type='checkbox']
       margin: 0 0 0 20px
+    select
+      margin: 0 0 0 7px
+    td.remove
+      padding-left: 20px
 
 section#dashboard
   header

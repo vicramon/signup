@@ -18,16 +18,16 @@ describe User do
     end
   end
 
-  describe '#has_access?' do
+  describe '#owner?' do
     it 'returns true if form belongs to user' do
       create_user_with_form
-      @user.has_access?(@form).should be true
+      @user.owner?(@form).should be true
     end
 
     it 'returns false if form does not belong to user' do
       create_user_with_form
       other_form = Fabricate(:form)
-      @user.has_access?(other_form).should be false
+      @user.owner?(other_form).should be false
     end
   end
 

@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  def has_access?(form)
+  def owner?(form)
     forms.map(&:id).include? form.id
   end
 
