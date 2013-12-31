@@ -7,9 +7,9 @@ class CreateForms < ActiveRecord::Migration
       t.date :date
       t.time :starts_at
       t.time :ends_at
-      t.boolean :send_reminders
-      t.integer :reminder_days_before
-      t.boolean :notify_admin_of_new_signup
+      t.boolean :send_reminders, default: true
+      t.integer :reminder_days_before, default: 1
+      t.boolean :notify_admin_of_new_signup, default: true
       t.boolean :published, default: false
 
       t.timestamps

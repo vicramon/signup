@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131229020746) do
+ActiveRecord::Schema.define(version: 20131231232707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: true do |t|
     t.string   "name"
+    t.boolean  "temporary",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "temporary",  default: false
   end
 
   create_table "contacts", force: true do |t|
@@ -50,12 +50,13 @@ ActiveRecord::Schema.define(version: 20131229020746) do
     t.date     "date"
     t.time     "starts_at"
     t.time     "ends_at"
-    t.boolean  "send_reminders"
-    t.integer  "reminder_days_before"
-    t.boolean  "notify_admin_of_new_signup"
+    t.boolean  "send_reminders",             default: true
+    t.integer  "reminder_days_before",       default: 1
+    t.boolean  "notify_admin_of_new_signup", default: true
     t.boolean  "published",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "invite_text"
   end
 
   add_index "forms", ["account_id"], name: "index_forms_on_account_id", using: :btree
@@ -68,6 +69,16 @@ ActiveRecord::Schema.define(version: 20131229020746) do
   end
 
   add_index "groups", ["account_id"], name: "index_groups_on_account_id", using: :btree
+
+  create_table "invites", force: true do |t|
+    t.string   "email"
+    t.integer  "form_id"
+    t.boolean  "sent",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invites", ["form_id"], name: "index_invites_on_form_id", using: :btree
 
   create_table "memberships", force: true do |t|
     t.integer  "user_id"

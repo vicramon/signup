@@ -51,6 +51,9 @@ input[type='text'], input[type='password'], textarea
   padding: 3px 3px 2px
   border: 1px solid #2693FF
 
+textarea
+  padding: 5px 5px
+
 select
   font-family: "Myriad Pro"
   font-size: 16px
@@ -121,6 +124,9 @@ section#new_signup
     font-family: "Myriad Pro"
     font-weight: bold
     padding-bottom: 15px
+  h3
+    padding-bottom: 12px
+    font-size: 18px
   nav
     border-bottom: 1px solid #BBBBBB
     margin: 15px 0 20px
@@ -173,6 +179,11 @@ section#new_signup
     td.remove
       padding-left: 20px
 
+section#people
+  textarea
+    height: 100px
+    margin-bottom: 12px
+
 section#dashboard
   header
     margin-bottom: 30px
@@ -201,9 +212,33 @@ article#new_custom_field
   width: 400px
   background: #eee
   border-radius: 5px
+  h3
+    padding-bottom: 0px
   label
     text-align: left
     width: auto
     display: inline-block
   input + label
     padding-left: 10px
+
+label.left
+  text-align: left
+  width: auto
+
+article#invite_list
+  float: left
+  background: #eee
+  border-radius: 5px
+  padding: 12px 20px
+  min-height: 300px
+  width: 200px
+  margin: 0 0 0 30px
+  font-size: 15px
+  li
+    padding-bottom: 5px
+
+article#invitation_fields
+  float: left
+
+.clear
+  clear: both

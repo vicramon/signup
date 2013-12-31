@@ -13,7 +13,7 @@
           - if current_user
             - if current_user.temporary?
               Signed in as Temporary User.
-              = current_user.email
+              = truncate current_user.email
             = link_to "Logout", :sign_out
           - else
             = link_to "Home", :root

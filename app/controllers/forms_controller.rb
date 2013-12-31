@@ -13,6 +13,7 @@ class FormsController < ApplicationController
 
   def create
     form = Form.create(form_params)
+    form.set_default_invite_text
     form.account = current_user.accounts.first
     form.save
     redirect_to [form, :slots]
@@ -41,7 +42,25 @@ class FormsController < ApplicationController
     redirect_to [form, :people]
   end
 
+  def update_people
+    save_emails
+    form.update_attributes(form_params)
+    redirect_to [form, :people]
+  end
+
   private
+
+  def save_emails
+    emails = parse_emails(params[:emails])
+    existing_emails = form.invites.map(&:email)
+    emails.each do |email|
+      form.invites.create(email: email) unless existing_emails.include? email
+    end
+  end
+
+  def parse_emails(raw)
+    raw.gsub("\n", ",").split(",").map(&:strip).reject(&:empty?)
+  end
 
   def create_temporary_if_no_user
     sign_in(User.create_temporary) unless current_user
@@ -62,6 +81,7 @@ class FormsController < ApplicationController
       :reminder_days_before,
       :notify_admin_of_new_signup,
       :published,
+      :invite_text,
       slots_attributes: [:id, :name, :max],
       fields_attributes: [:id, :name, :required]
     )

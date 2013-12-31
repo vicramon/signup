@@ -1,3 +1,40 @@
-= form_for form do |f|
+%section#people
 
-  %h2 People
+  %h2 Notifications
+
+  = form_for form, url: form_update_people_path(form) do |f|
+
+    %dl
+      = f.label :notify_admin_of_new_signup, "Notify me by email when someone signs up.", style: 'width: auto'
+      = f.select :notify_admin_of_new_signup, options_for_select([['yes', true], ['no', false]],
+        form.notify_admin_of_new_signup)
+
+    %dl
+      Send email reminders
+      = f.select :reminder_days_before, 1..5, selected: form.reminder_days_before
+      = "day".pluralize(form.reminder_days_before)
+      before the event.
+
+    %br
+
+    %h2 Invites
+
+    %article#invitation_fields
+      %dl
+        %div{ style: 'margin-bottom: 5px' } Enter emails separated by lines or commas
+        = text_area_tag "emails"
+
+      %dl
+        %div{ style: 'margin-bottom: 5px' } What do you want the invitation emails to say?
+        = f.text_area :invite_text
+
+    - if form.invites.present?
+      %article#invite_list
+        %h3= "Invite List (#{form.invites.count})"
+        - form.invites.ordered.each do |invite|
+          %li= invite.email
+
+
+    %br
+    .clear
+    = f.submit "Save & Preview", class: 'green'
