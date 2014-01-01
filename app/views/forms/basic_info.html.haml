@@ -10,6 +10,10 @@
     = f.label :description, "Description:", class: 'textarea_label'
     = f.text_area :description, rows: 3
 
+  %dl{ style: 'margin-top: 7px' }
+    = f.label :location, "Location:"
+    = f.text_field :location
+
   %br
   %h2 Date and Time
 

@@ -16,6 +16,8 @@ Signup::Application.routes.draw do
 
     get 'people'
     patch 'update_people'
+
+    get 'preview'
   end
 
   resources :slots, only: [:create, :destroy]

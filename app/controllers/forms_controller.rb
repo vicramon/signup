@@ -45,7 +45,11 @@ class FormsController < ApplicationController
   def update_people
     save_emails
     form.update_attributes(form_params)
-    redirect_to [form, :people]
+    if params[:commit].include? "Preview"
+      redirect_to [form, :preview]
+    else
+      redirect_to [form, :people]
+    end
   end
 
   private
@@ -74,6 +78,7 @@ class FormsController < ApplicationController
     params.require(:form).permit(
       :name,
       :description,
+      :location,
       :starts_at,
       :ends_at,
       :date,

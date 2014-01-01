@@ -1,0 +1,17 @@
+%section#live_form
+
+  %h1= "Signup Form for #{form.name}."
+
+  - if form.description.present?
+    #description
+      = form.description
+
+  - if form.has_when?
+    #when
+      When: #{form.pretty_date}
+
+  - if form.location.present?
+    #where
+      Where: #{form.location}
+
+  %table#live_slots

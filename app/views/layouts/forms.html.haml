@@ -8,12 +8,14 @@
         = active_li_link_to 'Slots', [form, :slots]
         = active_li_link_to 'Form Fields', [form, :fields]
         = active_li_link_to 'People', [form, :people]
+        = active_li_link_to 'Preview', [form, :preview]
       - else
         .disabled_nav
           %li.selected= link_to 'Basic Info', '#'
           %li= link_to 'Slots', '#'
           %li= link_to 'Form Fields', '#'
           %li= link_to 'People', '#'
+          %li= link_to 'Preview', '#'
 
     = yield
 

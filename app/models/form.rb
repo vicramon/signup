@@ -14,4 +14,14 @@ class Form < ActiveRecord::Base
     save
   end
 
+  def has_when?
+    self.date.present? or
+      self.starts_at.present? or
+      self.ends_at.present?
+  end
+
+  def pretty_date
+    self.date.strftime("%A, %B %e, %Y")
+  end
+
 end
