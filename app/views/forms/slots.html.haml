@@ -5,6 +5,11 @@ If you need people to signup for specific slots then create them here. Otherwise
 
 = form_for form, url: form_update_slots_path(form) do |f|
   = f.hidden_field :continue
+
+  %br
+  = f.check_box :require_slot
+  = f.label :require_slot, "Require people to signup for a specific slot.", class: 'left'
+
   - if form.slots.present?
     %table#slots
       %tr
@@ -23,7 +28,7 @@ If you need people to signup for specific slots then create them here. Otherwise
     %br
     = f.hidden_field :form_id, value: form.id
     = f.label :name, "Slot name:"
-    = f.text_field :name, style: 'width: 170px'
+    = f.text_field :name, style: 'width: 220px'
     = f.label :required, "People allowed:"
     = f.select :max, @max_options
     %br

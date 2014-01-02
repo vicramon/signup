@@ -82,10 +82,6 @@ class FormsController < ApplicationController
     sign_in(User.create_temporary) unless current_user
   end
 
-  def current_signup
-    sessions[:current_form]
-  end
-
   def form_params
     params.require(:form).permit(
       :name,
@@ -100,6 +96,7 @@ class FormsController < ApplicationController
       :published,
       :invite_text,
       :continue,
+      :require_slot,
       slots_attributes: [:id, :name, :max],
       fields_attributes: [:id, :name, :required]
     )
