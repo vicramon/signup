@@ -5,15 +5,16 @@
   = form_for form, url: form_update_people_path(form) do |f|
 
     %dl
+      = f.check_box :notify_admin_of_new_signup
       = f.label :notify_admin_of_new_signup, "Notify me by email when someone signs up.", style: 'width: auto'
-      = f.select :notify_admin_of_new_signup, options_for_select([['yes', true], ['no', false]],
-        form.notify_admin_of_new_signup)
 
     %dl
-      Send email reminders
+      = f.check_box :send_reminders
+      = f.label :send_reminders, 'Send email reminders', class: 'left'
       = f.select :reminder_days_before, 1..5, selected: form.reminder_days_before
-      = "day".pluralize(form.reminder_days_before)
-      before the event.
+      = f.label :send_reminders, class: 'left' do
+        = "day".pluralize(form.reminder_days_before)
+        before the event.
 
     %br
 
