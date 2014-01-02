@@ -14,6 +14,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'thin'
 gem 'uglifier', '>= 1.3.0'
 gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'turbolinks'
 
 group :test, :development do
   gem 'pry'
