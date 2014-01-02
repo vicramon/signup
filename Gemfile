@@ -19,6 +19,7 @@ group :test, :development do
   gem 'pry'
   gem 'launchy'
   gem 'faker'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -32,5 +33,4 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'poltergeist', require: 'capybara/poltergeist'
-  gem 'selenium-webdriver'
 end
