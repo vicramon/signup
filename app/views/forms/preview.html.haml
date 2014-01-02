@@ -4,5 +4,15 @@ The real invitation will open in a full page.
 = link_to "Click here", form
 to see a full page preview.
 
+- if form.draft?
+  = form_for form, url: form_update_preview_path(form) do |f|
+    = f.submit "Save Draft", class: 'blue'
+    = f.submit "Publish & Send Invites", class: 'orange'
+
+- else
+  - if form.has_unsent_invites?
+    = form_for form, url: form_send_invites_path(form) do |f|
+      = f.submit "Send Unsent Invites (#{form.unsent_invites.count})", class: 'orange'
+
 %article#preview
   = render 'signup/show.html.haml'

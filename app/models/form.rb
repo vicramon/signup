@@ -26,4 +26,20 @@ class Form < ActiveRecord::Base
     self.date.strftime("%A, %B %e, %Y")
   end
 
+  def publish!
+    update_attribute(:published, true)
+  end
+
+  def draft?
+    !published
+  end
+
+  def unsent_invites
+    invites.select { |invite| invite.unsent? }
+  end
+
+  def has_unsent_invites?
+    unsent_invites.any?
+  end
+
 end

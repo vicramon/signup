@@ -24,6 +24,7 @@ class FormsController < ApplicationController
     if params[:commit].include? "Continue"
       redirect_to [form, :slots]
     else
+      flash_save
       redirect_to [form, :basic_info]
     end
   end
@@ -37,6 +38,7 @@ class FormsController < ApplicationController
     if params[:form][:continue].present?
       redirect_to [form, :fields]
     else
+      flash_save
       redirect_to [form, :slots]
     end
   end
@@ -50,6 +52,7 @@ class FormsController < ApplicationController
     if params[:form][:continue].present?
       redirect_to [form, :people]
     else
+      flash_save
       redirect_to [form, :fields]
     end
   end
@@ -60,18 +63,50 @@ class FormsController < ApplicationController
     if params[:commit].include? "Preview"
       redirect_to [form, :preview]
     else
+      flash_save
       redirect_to [form, :people]
     end
   end
 
+  def update_preview
+    if params[:commit].include? "Publish"
+      form.publish!
+      send_emails
+      redirect_to [form, :published]
+    else
+      flash_save
+      redirect_to [form, :preview]
+    end
+  end
+
+  def send_invites
+    send_emails
+    flash[:notice] = "All unsent invitations have now been sent."
+    redirect_to [form, :preview]
+  end
+
   private
+
+  def flash_save
+    flash[:notice] = "Your changes have been saved."
+  end
+
+  def send_emails
+    form.invites.each { |invite| invite.send! }
+  end
 
   def save_emails
     emails = parse_emails(params[:emails])
     existing_emails = form.invites.map(&:email)
     emails.each do |email|
-      form.invites.create(email: email) unless existing_emails.include? email
+      if !existing_emails.include?(email) and soft_valid_email?(email)
+        form.invites.create(email: email)
+      end
     end
+  end
+
+  def soft_valid_email?(email)
+    email.include?("@") and email.include?(".")
   end
 
   def parse_emails(raw)

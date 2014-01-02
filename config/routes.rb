@@ -7,17 +7,16 @@ Signup::Application.routes.draw do
   resources :forms do
     get 'basic_info', on: :collection
     get 'basic_info'
-
     get 'slots'
     patch 'update_slots'
-
     get 'fields'
     patch 'update_fields'
-
     get 'people'
     patch 'update_people'
-
     get 'preview'
+    patch 'update_preview'
+    get 'published'
+    patch 'send_invites'
   end
 
   resources :slots, only: [:create, :destroy]

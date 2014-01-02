@@ -17,6 +17,8 @@
           %li= link_to 'People', '#'
           %li= link_to 'Preview', '#'
 
+    - if flash[:notice]
+      .notice= flash[:notice]
     = yield
 
 = render template: 'layouts/application'
