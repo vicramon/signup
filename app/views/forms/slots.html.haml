@@ -3,8 +3,9 @@
 If you need people to signup for specific slots then create them here. Otherwise
 = link_to "continue.", [form, :fields]
 
-- if form.slots.present?
-  = form_for form, url: form_update_slots_path(form) do |f|
+= form_for form, url: form_update_slots_path(form) do |f|
+  = f.hidden_field :continue
+  - if form.slots.present?
     %table#slots
       %tr
         %th Slot Name
@@ -28,10 +29,4 @@ If you need people to signup for specific slots then create them here. Otherwise
     %br
       = f.submit 'Create Slot', class: 'blue'
 
-
-= submit_tag "Continue &raquo;".html_safe, class: 'green', id: 'main_submit'
-
-:javascript
-  $('#main_submit').click( function() {
-    $('form').first().submit()
-  })
+= render 'submit_buttons', saveable: form.slots.count > 0

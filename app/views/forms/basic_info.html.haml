@@ -32,7 +32,11 @@
   %br
   %dl
     = label_tag nil
-    = f.submit "Continue &raquo;".html_safe, class: 'green'
+    - if form.persisted?
+      = f.submit "Save".html_safe, class: 'blue'
+      = f.submit "Save & Continue".html_safe, class: 'green'
+    - else
+      = f.submit "Continue &raquo;".html_safe, class: 'green'
 
 :javascript
   new LiveValidation('form_name').add( Validate.Presence, { failureMessage: "required" } );

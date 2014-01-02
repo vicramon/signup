@@ -9,6 +9,8 @@ class Form < ActiveRecord::Base
   scope :published, -> { where(published: true) }
   scope :drafted, -> { where(published: false) }
 
+  attr_accessor :continue
+
   def set_default_invite_text
     self.invite_text = "You've been invited to #{self.name}.\n\nYou can signup by clicking the link below"
     save

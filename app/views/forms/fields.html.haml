@@ -4,6 +4,7 @@ If you need specific information from people then create custom fields. Otherwis
 = link_to "continue.", [form, :people]
 
 = form_for form, url: form_update_fields_path(form) do |f|
+  = f.hidden_field :continue
   %table#fields
     %tr
       %th Field Name
@@ -34,9 +35,4 @@ If you need specific information from people then create custom fields. Otherwis
     %br
       = f.submit 'Add Custom Field', class: 'blue'
 
-= submit_tag "Continue &raquo;".html_safe, class: 'green', id: 'main_submit'
-
-:javascript
-  $('#main_submit').click( function() {
-    $('form').first().submit()
-  })
+= render 'submit_buttons', saveable: form.fields.count > 0

@@ -1,0 +1,14 @@
+- if saveable
+  = submit_tag "Save", class: 'blue submit'
+  = submit_tag "Save & Continue".html_safe, class: 'green continue_submit'
+- else
+  = submit_tag "Continue".html_safe, class: 'green continue_submit'
+
+
+:javascript
+  $('.submit').click( function() { $('form').first().submit() })
+
+  $('.continue_submit').click( function() {
+    $('#form_continue').val('true')
+    $('form').first().submit()
+  })

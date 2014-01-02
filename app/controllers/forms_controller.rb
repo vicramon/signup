@@ -21,7 +21,11 @@ class FormsController < ApplicationController
 
   def update
     form.update_attributes(form_params)
-    redirect_to [form, :slots]
+    if params[:commit].include? "Continue"
+      redirect_to [form, :slots]
+    else
+      redirect_to [form, :basic_info]
+    end
   end
 
   def slots
@@ -30,7 +34,11 @@ class FormsController < ApplicationController
 
   def update_slots
     form.update_attributes(form_params)
-    redirect_to [form, :fields]
+    if params[:form][:continue].present?
+      redirect_to [form, :fields]
+    else
+      redirect_to [form, :slots]
+    end
   end
 
   def fields
@@ -39,7 +47,11 @@ class FormsController < ApplicationController
 
   def update_fields
     form.update_attributes(form_params)
-    redirect_to [form, :people]
+    if params[:form][:continue].present?
+      redirect_to [form, :people]
+    else
+      redirect_to [form, :fields]
+    end
   end
 
   def update_people
@@ -87,6 +99,7 @@ class FormsController < ApplicationController
       :notify_admin_of_new_signup,
       :published,
       :invite_text,
+      :continue,
       slots_attributes: [:id, :name, :max],
       fields_attributes: [:id, :name, :required]
     )
