@@ -23,6 +23,8 @@ Signup::Application.routes.draw do
   resources :fields, only: [:create, :destroy]
   resources :signup, only: :show
 
+  get 'signup/:id/new/:slot_id', to: 'signup#new', as: 'new_signup'
+
   get 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   get 'sign_in', to: 'sessions#new', as: 'sign_in'
 

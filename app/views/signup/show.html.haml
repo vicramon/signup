@@ -1,6 +1,3 @@
-%header
-  Signup for #{form.name}
-
 #info
   - if form.description.present?
     .item What
@@ -26,5 +23,5 @@
     %tr
       %td= slot.name
       %td= slot.max
-      %td= link_to "Signup", "#"
+      %td= link_to "Signup", new_signup_path(form, slot)
 
