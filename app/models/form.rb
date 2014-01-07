@@ -26,6 +26,17 @@ class Form < ActiveRecord::Base
     self.date.strftime("%A, %B %e, %Y")
   end
 
+  def when
+    output = ''
+    output += "From #{pretty_time(starts_at)} to #{pretty_time(ends_at)} " if starts_at and ends_at
+    output += "on #{pretty_date}" if date
+    output
+  end
+
+  def pretty_time(time)
+    time.strftime("%l:%M %P")
+  end
+
   def publish!
     update_attribute(:published, true)
   end

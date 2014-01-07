@@ -1,0 +1,56 @@
+@import 'shared', 'whitespace-reset', 'fonts', 'validations'
+
+body
+  background: #AAA
+  font-size: 18px
+  line-height: 1.6
+
+#container
+  width: 760px
+  margin: 20px auto 0
+  background: white
+  opacity: .97
+  padding: 25px 60px
+  min-height: 400px
+  box-shadow: 0 0 15px white
+
+header
+  font-size: 26px
+  font-family: "Myriad Pro"
+  font-weight: bold
+  padding-bottom: 30px
+  text-align: center
+
+#info
+  .item
+    float: left
+    width: 70px
+    clear: left
+    font-weight: bold
+  .info
+    float: left
+    max-width: 340px
+    margin-bottom: 20px
+
+.clear
+  clear: both
+  height: 0
+
+.line
+  border-bottom: 1px solid #CCCCCC
+  margin: 20px 0
+
+table#slots
+  th
+    text-align: left
+    display: inline-block
+    width: 180px
+    margin-left: 5px
+  td
+    width: 180px
+  td + td, th + th
+    text-align: center
+  tr + tr
+    border-bottom: 1px solid #ccc
+    display: block
+    padding: 5px 3px 3px

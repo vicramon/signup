@@ -1,0 +1,30 @@
+%header
+  Signup for #{form.name}
+
+#info
+  - if form.description.present?
+    .item What
+    .info= form.description
+  - if form.has_when?
+    .item When
+    .info= form.when
+  - if form.location.present?
+    .item Where
+    .info= form.location.capitalize
+
+.clear
+.line
+
+%table#slots
+  %tr
+    %th
+      Slot
+    %th
+      Remaining Spots
+    %th
+  - form.slots.each do |slot|
+    %tr
+      %td= slot.name
+      %td= slot.max
+      %td= link_to "Signup", "#"
+

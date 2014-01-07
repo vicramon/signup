@@ -4,6 +4,8 @@ The real invitation will open in a full page.
 = link_to "Click here", form
 to see a full page preview.
 
+%br
+%br
 - if form.draft?
   = form_for form, url: form_update_preview_path(form) do |f|
     = f.submit "Save Draft", class: 'blue'
