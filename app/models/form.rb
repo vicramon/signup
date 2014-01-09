@@ -3,6 +3,7 @@ class Form < ActiveRecord::Base
   has_many :slots
   has_many :fields
   has_many :invites
+  has_many :rsvps
   accepts_nested_attributes_for :slots, reject_if: proc { |attributes| attributes['name'].blank? }
   accepts_nested_attributes_for :fields, reject_if: proc { |attributes| attributes['name'].blank? }
 

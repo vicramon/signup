@@ -1,0 +1,25 @@
+:css
+  label {
+    width: 50px
+    }
+
+%h2 Complete Your Signup
+
+= form_for @user, url: signups_path do |f|
+  %dl
+    = label_tag "Slot:"
+    = slot.name
+    = hidden_field_tag :slot_id, slot.id
+    = hidden_field_tag :form_id, form.id
+
+  %dl
+    = f.label :name, "Name:"
+    = f.text_field :name
+
+  %dl
+    = f.label :email, "Email:"
+    = f.text_field :email
+
+  = label_tag nil
+  = f.submit 'Signup', class: 'blue'
+

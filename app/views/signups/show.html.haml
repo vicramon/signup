@@ -22,6 +22,10 @@
   - form.slots.each do |slot|
     %tr
       %td= slot.name
-      %td= slot.max
-      %td= link_to "Signup", new_signup_path(form, slot)
+      %td= slot.remaining
+      %td
+        - if slot.open?
+          = link_to "Signup", new_signup_path(form, slot)
+        - else
+          .full Full
 
