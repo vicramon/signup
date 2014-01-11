@@ -8,6 +8,10 @@ class FormsController < ApplicationController
     id ? forms.find(id) : Form.new
   end
 
+  def show
+    render template: 'signups/show', layout: 'signups'
+  end
+
   def new; redirect_to basic_info_forms_path; end
   def edit; redirect_to [form, :basic_info]; end
 
@@ -60,7 +64,7 @@ class FormsController < ApplicationController
   def update_people
     save_emails
     form.update_attributes(form_params)
-    if params[:commit].include? "Preview"
+    if params[:commit].include? "Continue"
       redirect_to [form, :preview]
     else
       flash_save
