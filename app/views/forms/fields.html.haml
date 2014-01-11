@@ -28,11 +28,19 @@ If you need specific information from people then create custom fields. Otherwis
     %h3 Add custom form field
     %br
     = f.hidden_field :form_id, value: form.id
-    = f.label :name, "Name:"
-    = f.text_field :name, style: 'width: 170px'
+    = f.label :name, "Field Name:"
+    = f.text_field :name, style: 'width: 220px'
+    %br
     = f.label :required, "Required:"
     = f.select :required, @required_options
     %br
       = f.submit 'Add Custom Field', class: 'blue'
 
 = render 'submit_buttons', saveable: form.fields.count > 0
+
+:javascript
+  new LiveValidation('field_name').add( Validate.Presence, { failureMessage: "required" } );
+  new LiveValidation('slot_name').add( Validate.Presence, { failureMessage: "required" } );
+
+:css
+  label { width: 90px }

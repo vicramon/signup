@@ -23,3 +23,7 @@
   = label_tag nil
   = f.submit 'Signup', class: 'blue'
 
+:javascript
+  new LiveValidation('user_name').add( Validate.Presence, { failureMessage: "required" } );
+  new LiveValidation('user_email').add( Validate.Presence, { failureMessage: "required" } );
+  new LiveValidation('user_email').add( Validate.Email, { failureMessage: "must be valid" } );

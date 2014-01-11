@@ -24,14 +24,21 @@ If you need people to signup for specific slots then create them here. Otherwise
 
 %article#new_custom_field
   = form_for form.slots.build do |f|
-    %h3 Create slot
+    %h3 Create a New Slot
     %br
     = f.hidden_field :form_id, value: form.id
     = f.label :name, "Slot name:"
     = f.text_field :name, style: 'width: 220px'
+    %br
     = f.label :required, "People allowed:"
     = f.select :max, @max_options
     %br
       = f.submit 'Create Slot', class: 'blue'
 
 = render 'submit_buttons', saveable: form.slots.count > 0
+
+:javascript
+  new LiveValidation('slot_name').add( Validate.Presence, { failureMessage: "required" } );
+
+:css
+  label { width: 115px }
