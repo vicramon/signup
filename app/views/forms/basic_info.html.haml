@@ -19,15 +19,15 @@
 
   %dl
     = f.label :date, "Date:"
-    = f.date_select :date, order: [:month, :day, :year]
+    = f.date_select :date, order: [:month, :day, :year], default: 5.days.from_now
 
   %dl
     = f.label :starts_at, "Starts:"
-    = f.time_select :starts_at, ampm: true, minute_step: 15
+    = f.time_select :starts_at, ampm: true, minute_step: 15, default: Time.now.change(hour: 19)
 
   %dl
     = f.label :ends_at, "Ends:"
-    = f.time_select :ends_at, ampm: true, minute_step: 15
+    = f.time_select :ends_at, ampm: true, minute_step: 15, default: Time.now.change(hour: 21)
 
   %br
   %dl
