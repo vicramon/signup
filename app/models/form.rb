@@ -12,6 +12,8 @@ class Form < ActiveRecord::Base
 
   attr_accessor :continue
 
+  def ordered_slots; slots.ordered; end
+
   def set_default_invite_text
     self.invite_text = "You've been invited to #{self.name}.\n\nYou can signup by clicking the link below"
     save

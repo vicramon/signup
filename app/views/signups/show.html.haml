@@ -19,7 +19,7 @@
     %th
       Remaining Spots
     %th
-  - form.slots.each do |slot|
+  - form.ordered_slots.each do |slot|
     %tr
       %td= slot.name
       %td= slot.remaining
@@ -28,4 +28,3 @@
           = link_to "Signup", new_signup_path(form, slot)
         - else
           .full Full
-
