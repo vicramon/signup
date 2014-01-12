@@ -1,6 +1,6 @@
 class SignupsController < ApplicationController
   expose(:form)
-  expose(:slot)
+  expose(:slot) { Slot.find_by_id(params[:slot_id]) }
 
   def new
     @user = User.new
@@ -8,8 +8,25 @@ class SignupsController < ApplicationController
   end
 
   def create
-    slot = Slot.find(params[:slot_id])
+    slot = Slot.find_by_id(params[:slot_id])
     form = Form.find(params[:form_id])
+    if slot
+      slot_signup
+    else
+      general_signup
+    end
+    redirect_to signup_path(form)
+  end
+
+  private
+
+  def general_signup
+    user = get_or_create_rsvp_user
+    create_rsvp(user, form, nil)
+    flash[:notice] = "You've successfully signed up!"
+  end
+
+  def slot_signup
     if slot.open?
       user = get_or_create_rsvp_user
       create_rsvp(user, form, slot)
@@ -17,10 +34,7 @@ class SignupsController < ApplicationController
     else
       flash[:error] = "Sorry, but that slot is now full."
     end
-    redirect_to signup_path(form)
   end
-
-  private
 
   def create_rsvp(user, form, slot)
     user.rsvps.create(form: form, slot: slot)

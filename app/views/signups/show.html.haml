@@ -11,20 +11,23 @@
 
 .clear
 .line
-
-%table#slots
-  %tr
-    %th
-      Slot
-    %th
-      Remaining Spots
-    %th
-  - form.ordered_slots.each do |slot|
+- if form.slots.present?
+  %table#slots
     %tr
-      %td= slot.name
-      %td= slot.remaining
-      %td
-        - if slot.open?
-          = link_to "Signup", new_signup_path(form, slot)
-        - else
-          .full Full
+      %th
+        Slot
+      %th
+        Remaining Spots
+      %th
+    - form.ordered_slots.each do |slot|
+      %tr
+        %td= slot.name
+        %td= slot.remaining
+        %td
+          - if slot.open?
+            = link_to "Signup", new_signup_path(form, slot)
+          - else
+            .full Full
+
+- else
+  = link_to "Signup", new_signup_path(form)

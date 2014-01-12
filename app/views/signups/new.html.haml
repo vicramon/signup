@@ -5,12 +5,14 @@
 
 %h2 Complete Your Signup
 
+%br
 = form_for @user, url: signups_path do |f|
-  %dl
-    = label_tag "Slot:"
-    = slot.name
-    = hidden_field_tag :slot_id, slot.id
-    = hidden_field_tag :form_id, form.id
+  = hidden_field_tag :form_id, form.id
+  - if slot
+    %dl
+      = label_tag "Slot:"
+      = slot.name
+      = hidden_field_tag :slot_id, slot.id
 
   %dl
     = f.label :name, "Name:"

@@ -5,6 +5,11 @@ Given(/^there is a published signup form with slots$/) do
   @slot2 = Fabricate(:slot, form: @form, name: 'Steak', max: 5)
 end
 
+Given(/^there is a published signup form with no slots$/) do
+  create_user_with_account
+  @form = Fabricate(:form, account: @account, published: true)
+end
+
 When(/^I visit that signup form$/) do
   visit signup_path(@form)
 end
@@ -19,11 +24,14 @@ When(/^I fill out the signup form$/) do
   click_button "Signup"
 end
 
-Then(/^I should be signed up for that slot$/) do
+Then(/^I should be signed up for that event/) do
   rsvp = Rsvp.last
   user = Rsvp.last.user
   user.name.should == 'Billy Ray'
   user.email.should == 'bill@example.com'
   rsvp.form.should == @form
-  rsvp.slot.should == @slot1
+end
+
+Then(/^I should be signed up for that slot$/) do
+  Rsvp.last.slot.should == @slot1
 end
