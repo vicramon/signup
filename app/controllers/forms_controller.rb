@@ -81,6 +81,9 @@ class FormsController < ApplicationController
 
   def update_preview
     if params[:commit].include? "Publish"
+      if current_user.temporary?
+        redirect_to [form, :account] and return
+      end
       form.publish!
       send_emails
       redirect_to [form, :published]
@@ -88,6 +91,21 @@ class FormsController < ApplicationController
       flash_save
       redirect_to [form, :preview]
     end
+  end
+
+  def account
+    current_user.email = nil
+  end
+
+  def update_account
+    if User.find_by_email(params[:user][:email])
+      flash[:error] = "Sorry, but there is already an account associated with that email."
+      redirect_to [form, :account] and return
+    end
+    current_user.update_attributes(user_params.merge(temporary: false))
+    form.publish!
+    send_emails
+    redirect_to [form, :published]
   end
 
   def send_invites
@@ -146,6 +164,13 @@ class FormsController < ApplicationController
       slots_attributes: [:id, :name, :max],
       fields_attributes: [:id, :name, :required]
     )
+  end
+
+  def user_params
+    params.require(:user).permit(
+      :name,
+      :email,
+      :password).merge(password_confirmation: params[:user][:password])
   end
 
 end

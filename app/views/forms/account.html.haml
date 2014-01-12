@@ -1,0 +1,30 @@
+%h2 Last Step: Basic Account Info
+
+- if flash[:error]
+  .error= flash[:error]
+  %br
+
+Before we can publish your signup we need some information from you.
+%br
+%br
+
+%section#account_form
+  = form_for current_user, url: form_update_account_path(form) do |f|
+    %dl
+      = f.label :name, "Your Name:"
+      = f.text_field :name
+    %dl
+      = f.label :email, "Your Email:"
+      = f.text_field :email
+    %dl
+      = f.label :password, "Create a password:"
+      = f.password_field :password
+    %dl
+      = label_tag nil
+      = f.submit "Save Info & Publish Signup", class: 'blue'
+
+:javascript
+  new LiveValidation('user_name').add( Validate.Presence, { failureMessage: "required" } );
+  new LiveValidation('user_password').add( Validate.Presence, { failureMessage: "required" } );
+  new LiveValidation('user_email').add( Validate.Presence, { failureMessage: "required" } );
+  new LiveValidation('user_email').add( Validate.Email, { failureMessage: "must be valid" } );
