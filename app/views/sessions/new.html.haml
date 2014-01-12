@@ -2,7 +2,7 @@
   %h2 Login
 
   - if flash[:alert]
-    .alert= flash[:alert]
+    .error= flash[:alert]
 
   = form_tag sessions_path do
 

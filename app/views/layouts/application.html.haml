@@ -11,9 +11,13 @@
       #inside_header
         %nav
           - if current_user
-            - if current_user.temporary?
-              Signed in as Temporary User.
-              = truncate current_user.email
+            .user_info
+              - if current_user.temporary?
+                Signed in as Temporary User.
+              - else
+                Welcome #{current_user.name}.
+            - if !current_user.temporary?
+              = link_to "Account", current_user
             = link_to "Logout", :sign_out
           - else
             = link_to "Home", :root

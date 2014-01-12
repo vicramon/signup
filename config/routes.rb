@@ -17,11 +17,14 @@ Signup::Application.routes.draw do
     patch 'update_preview'
     get 'published'
     patch 'send_invites'
+    get 'account'
+    patch 'update_account'
   end
 
   resources :slots, only: [:create, :destroy]
   resources :fields, only: [:create, :destroy]
   resources :signups, only: [:show, :create]
+  resources :users, only: [:show]
 
   get 'signups/:id/new(/:slot_id)', to: 'signups#new', as: 'new_signup'
 
