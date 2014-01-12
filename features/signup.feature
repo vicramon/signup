@@ -14,3 +14,11 @@ Feature: Signup
     And I follow "Signup"
     And I fill out the signup form
     Then I should be signed up for that event
+
+  Scenario: User can't signup twice
+    Given there is a published signup form with no slots
+    And I am already signed up for that event
+    When I visit that signup form
+    And I follow "Signup"
+    And I fill out the signup form
+    Then I should see a notice that I am already signed up

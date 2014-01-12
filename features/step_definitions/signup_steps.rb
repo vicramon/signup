@@ -35,3 +35,12 @@ end
 Then(/^I should be signed up for that slot$/) do
   Rsvp.last.slot.should == @slot1
 end
+
+Given /^I am already signed up for that event$/ do
+  @user.update_attribute(:email, 'bill@example.com')
+  Rsvp.create(form: @form, user: @user)
+end
+
+Then /^I should see a notice that I am already signed up$/ do
+  page.should have_css '.error'
+end

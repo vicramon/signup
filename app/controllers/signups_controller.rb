@@ -15,15 +15,23 @@ class SignupsController < ApplicationController
   def create
     slot = Slot.find_by_id(params[:slot_id])
     form = Form.find(params[:form_id])
-    if slot
-      slot_signup
+    if already_signed_up?
+      flash[:error] = "You appear to have already signed up for this event."
     else
-      general_signup
+      if slot
+        slot_signup
+      else
+        general_signup
+      end
     end
     redirect_to signup_path(form)
   end
 
   private
+
+  def already_signed_up?
+    form.rsvped_users.map(&:email).include? params[:user][:email]
+  end
 
   def general_signup
     user = get_or_create_rsvp_user

@@ -53,4 +53,8 @@ class Form < ActiveRecord::Base
 
   def has_unsent_invites?; unsent_invites.any?; end
 
+  def rsvped_users
+    rsvps.map(&:user)
+  end
+
 end
