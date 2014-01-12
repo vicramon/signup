@@ -1,7 +1,10 @@
 :css
   label {
-    width: 50px
+    width: 130px
     }
+  input {
+    vertical-align: top
+  }
 
 %h2 Complete Your Signup
 
@@ -21,6 +24,10 @@
   %dl
     = f.label :email, "Email:"
     = f.text_field :email
+  - form.fields.order(:id).each do |field|
+    %dl
+      = label_tag "field_#{field.id}", field.name + ':'
+      = text_field_tag "field_#{field.id}"
 
   = label_tag nil
   = f.submit 'Signup', class: 'blue'

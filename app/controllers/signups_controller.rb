@@ -33,16 +33,22 @@ class SignupsController < ApplicationController
     form.rsvped_users.map(&:email).include? params[:user][:email]
   end
 
+  def save_custom_fields
+    require 'pry'; binding.pry
+  end
+
   def general_signup
     user = get_or_create_rsvp_user
-    create_rsvp(user, form, nil)
+    rsvp = create_rsvp(user, form, nil)
+    save_custom_fields
     flash[:notice] = "You've successfully signed up!"
   end
 
   def slot_signup
     if slot.open?
       user = get_or_create_rsvp_user
-      create_rsvp(user, form, slot)
+      rsvp = create_rsvp(user, form, slot)
+      save_custom_fields
       flash[:notice] = "You've successfully signed up!"
     else
       flash[:error] = "Sorry, but that slot is now full."
