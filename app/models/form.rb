@@ -37,7 +37,7 @@ class Form < ActiveRecord::Base
   end
 
   def pretty_time(time)
-    time.strftime("%l:%M %P")
+    time.strftime("%l:%M%P")
   end
 
   def publish!
