@@ -1,11 +1,18 @@
 class FormsController < ApplicationController
   before_filter :create_temporary_if_no_user
+  before_filter :require_user, except: [:new, :basic_info]
+  before_filter :require_ownership
+
   expose(:forms) { current_user.forms }
   expose(:form) { new_or_find_form }
 
+  def require_ownership
+    redirect_to :sign_in if form.nil?
+  end
+
   def new_or_find_form
     id = params[:form_id] || params[:id]
-    id ? forms.find(id) : Form.new
+    id ? forms.find_by_id(id) : Form.new
   end
 
   def show

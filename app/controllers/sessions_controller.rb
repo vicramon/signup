@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
   expose(:user) { User.find_by_email(params[:email]) }
 
+  def new
+    redirect_to :dashboard if current_user
+  end
+
   def create
     if user && user.authenticate(params[:password])
       sign_in(user)
