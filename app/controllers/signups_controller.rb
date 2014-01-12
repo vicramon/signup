@@ -1,6 +1,11 @@
 class SignupsController < ApplicationController
-  expose(:form)
-  expose(:slot) { Slot.find_by_id(params[:slot_id]) }
+  before_filter :ensure_published
+  expose(:form, finder: :find_by_id)
+  expose(:slot, finder: :find_by_id)
+
+  def ensure_published
+    redirect_to :root if form.nil? or form.unpublished?
+  end
 
   def new
     @user = User.new

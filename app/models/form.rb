@@ -44,16 +44,13 @@ class Form < ActiveRecord::Base
     update_attribute(:published, true)
   end
 
-  def draft?
-    !published
-  end
+  def draft?; !published; end
+  alias unpublished? draft?
 
   def unsent_invites
     invites.select { |invite| invite.unsent? }
   end
 
-  def has_unsent_invites?
-    unsent_invites.any?
-  end
+  def has_unsent_invites?; unsent_invites.any?; end
 
 end

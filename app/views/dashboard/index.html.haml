@@ -8,7 +8,13 @@
   %article#published
     %h2 Published Signups
     - published.each do |form|
-      %li= link_to form.name, form
+      %li
+        = form.name
+        [
+        = link_to "edit", [:edit, form]
+        ,
+        = link_to "view", signup_path(form)
+        ]
 
   %article#drafted
     %h2 Drafts
@@ -17,6 +23,6 @@
         = form.name
         [
         = link_to "edit", [:edit, form]
-        , 
+        ,
         = link_to "preview", form
         ]
