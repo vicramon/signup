@@ -1,1 +1,8 @@
-%h2 Your signup form has been successfully published!
+%h3 Your signup form has been successfully published!
+%div{ style: 'height: 10px' }
+= link_to "Click here", signup_path(form)
+to view your live signup.
+
+%br
+%br
+= link_to "&laquo; Back to dashboard".html_safe, :dashboard
