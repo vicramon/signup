@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20140112222801) do
   create_table "field_infos", force: true do |t|
     t.integer  "field_id"
     t.integer  "rsvp_id"
+    t.integer  "user_id"
     t.text     "info"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140112222801) do
 
   add_index "field_infos", ["field_id"], name: "index_field_infos_on_field_id", using: :btree
   add_index "field_infos", ["rsvp_id"], name: "index_field_infos_on_rsvp_id", using: :btree
+  add_index "field_infos", ["user_id"], name: "index_field_infos_on_user_id", using: :btree
 
   create_table "fields", force: true do |t|
     t.string   "name"

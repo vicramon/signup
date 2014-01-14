@@ -24,10 +24,11 @@
   %dl
     = f.label :email, "Email:"
     = f.text_field :email
-  - form.fields.order(:id).each do |field|
-    %dl
-      = label_tag "field_#{field.id}", field.name + ':'
-      = text_field_tag "field_#{field.id}"
+    = f.fields_for :field_infos do |f|
+      = f.hidden_field :field_id
+      %dl
+        = f.label :info, f.object.field.name + ":"
+        = f.text_field :info
 
   = label_tag nil
   = f.submit 'Signup', class: 'blue'

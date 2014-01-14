@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   has_many :accounts, through: :memberships
   has_many :forms, through: :accounts
   has_many :rsvps
+  has_many :field_infos
+
+  accepts_nested_attributes_for :field_infos, reject_if: proc { |attributes| attributes['info'].blank? }
 
   validates :email, uniqueness: true
 

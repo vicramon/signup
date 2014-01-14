@@ -13,7 +13,9 @@
         [
         = link_to "edit", [:edit, form]
         ,
-        = link_to "view", signup_path(form)
+        = link_to "view form", signup_path(form)
+        ,
+        = link_to "view signups", [form, :admin, :index]
         ]
 
   %article#drafted

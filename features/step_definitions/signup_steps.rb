@@ -62,10 +62,10 @@ Given /^that signup form has custom fields$/ do
 end
 
 Then /^my custom field info should be saved$/ do
-  FieldInfo.last.field.should == @field2
-  FieldInfo.last.rsvp.should == @rsvp
-  FieldInfo.last.info.should == 'Husky'
-  FieldInfo.all[-1].field.should == @field1
-  FieldInfo.all[-1].rsvp.should == @rsvp
-  FieldInfo.all[-1].should == 'December 3, 1988'
+  FieldInfo.last.field.should == @field1
+  FieldInfo.last.rsvp.should == Rsvp.last
+  FieldInfo.last.info.should == 'December 3, 1988'
+  FieldInfo.all[-2].field.should == @field2
+  FieldInfo.all[-2].rsvp.should == Rsvp.last
+  FieldInfo.all[-2].info.should == 'Husky'
 end

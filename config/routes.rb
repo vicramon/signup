@@ -19,6 +19,7 @@ Signup::Application.routes.draw do
     patch 'send_invites'
     get 'account'
     patch 'update_account'
+    resources :admin, only: :index
   end
 
   resources :slots, only: [:create, :destroy]

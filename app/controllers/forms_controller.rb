@@ -3,7 +3,7 @@ class FormsController < ApplicationController
   before_filter :require_user, except: [:new, :basic_info]
   before_filter :require_ownership
 
-  expose(:forms) { current_user.forms }
+  expose(:forms, ancestor: :current_user)
   expose(:form) { new_or_find_form }
 
   def require_ownership

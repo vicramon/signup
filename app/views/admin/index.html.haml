@@ -1,0 +1,17 @@
+%h1 Signups for #{form.name}
+
+%table#admin_signups
+  %tr
+    %th
+    %th Name
+    %th Email
+    - form.fields.each do |field|
+      %th= field.name
+  - form.rsvps.each_with_index do |rsvp, index|
+    - index += 1
+    %tr
+      %td= index
+      %td= rsvp.user.name
+      %td= rsvp.user.email
+      - rsvp.field_infos.each do |field_info|
+        %td= field_info.info
