@@ -13,5 +13,6 @@
       %td= index
       %td= rsvp.user.name
       %td= rsvp.user.email
-      - rsvp.field_infos.each do |field_info|
-        %td= field_info.info
+      - form.fields.each do |field|
+        %td
+          = rsvp.info_for_field(field)
