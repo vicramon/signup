@@ -11,10 +11,10 @@
       %li
         = form.name
         [
-        = link_to "edit", [:edit, form]
-        ,
-        = link_to "view form", signup_path(form)
-        ,
+        = succeed "," do
+          = link_to "edit", [:edit, form]
+        = succeed "," do
+          = link_to "view form", signup_path(form)
         = link_to "view signups", [form, :admin, :index]
         ]
 
@@ -24,7 +24,7 @@
       %li
         = form.name
         [
-        = link_to "edit", [:edit, form]
-        ,
+        = succeed "," do
+          = link_to "edit", [:edit, form]
         = link_to "preview", form
         ]
