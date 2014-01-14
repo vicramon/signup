@@ -1,6 +1,12 @@
 = content_for :nested_layout do
   %section#new_signup
-    %h1 Create a New Signup
+    = render 'shared/breadcrumb'
+    %h1
+      - if form.persisted?
+        Edit #{form.name}
+      - else
+        Create a New Signup
+
 
     %nav
       - if form.persisted?
