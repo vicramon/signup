@@ -27,6 +27,12 @@ When(/^I fill out the signup form$/) do
   click_button "Signup"
 end
 
+When(/^I fill out the signup form but not the custom fields$/) do
+  fill_in "Name", with: 'Billy Ray'
+  fill_in "Email", with: 'bill@example.com'
+  click_button "Signup"
+end
+
 When(/^I fill out the signup form and custom fields$/) do
   fill_in "Name", with: 'Billy Ray'
   fill_in "Email", with: 'bill@example.com'
@@ -68,4 +74,9 @@ Then /^my custom field info should be saved$/ do
   FieldInfo.all[-2].field.should == @field2
   FieldInfo.all[-2].rsvp.should == Rsvp.last
   FieldInfo.all[-2].info.should == 'Husky'
+end
+
+
+Then /^I should see a javascript validation error$/ do
+  page.should have_css '.LV_invalid'
 end

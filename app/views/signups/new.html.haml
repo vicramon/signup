@@ -24,11 +24,17 @@
   %dl
     = f.label :email, "Email:"
     = f.text_field :email
+
     = f.fields_for :field_infos do |f|
       = f.hidden_field :field_id
+
       %dl
         = f.label :info, f.object.field.name + ":"
-        = f.text_field :info
+        = f.text_field :info, class: 'required'
+
+      - if f.object.field.required?
+        :javascript
+          new LiveValidation("user_field_infos_attributes_#{f.index}_info").add( Validate.Presence, { failureMessage: "required" } );
 
   = label_tag nil
   = f.submit 'Signup', class: 'blue'

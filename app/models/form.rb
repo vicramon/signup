@@ -32,7 +32,7 @@ class Form < ActiveRecord::Base
   def when
     output = ''
     output += "From #{pretty_time(starts_at)} to #{pretty_time(ends_at)} " if starts_at and ends_at
-    output += "on #{pretty_date}" if date
+    output += "\non #{pretty_date}" if date
     output
   end
 

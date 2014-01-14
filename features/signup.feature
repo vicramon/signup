@@ -32,3 +32,12 @@ Feature: Signup
     And I fill out the signup form and custom fields
     Then I should be signed up for that event
     And my custom field info should be saved
+
+  @javascript @pending
+  Scenario: Required custom fields are required
+    Given there is a published signup form
+    And that signup form has custom fields
+    When I visit that signup form
+    And I follow "Signup"
+    And I fill out the signup form but not the custom fields
+    Then I should see a javascript validation error

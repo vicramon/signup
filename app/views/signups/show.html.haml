@@ -4,7 +4,7 @@
     .info= form.description
   - if form.has_when?
     .item When
-    .info= form.when
+    .info= simple_format form.when
   - if form.location.present?
     .item Where
     .info= form.location.capitalize
