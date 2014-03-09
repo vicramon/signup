@@ -4,7 +4,24 @@ class Slot < ActiveRecord::Base
 
   scope :ordered, -> { order(:name) }
 
-  def remaining; max - rsvps.count; end
-  def full?; remaining <= 0; end
-  def open?; remaining > 0; end
+  def remaining
+    max - rsvps.count
+  end
+
+  def pretty_remaining
+    unlimited?? 'unlimited' : remaining
+  end
+
+  def full?
+    remaining <= 0 && !unlimited?
+  end
+
+  def open?
+    remaining > 0 || unlimited?
+  end
+
+  def unlimited?
+    max == 0
+  end
+
 end

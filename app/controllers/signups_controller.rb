@@ -4,7 +4,8 @@ class SignupsController < ApplicationController
   expose(:slot) { form.slots.find_by_id(params[:slot_id]) }
 
   def ensure_published
-    redirect_to :root if form.nil? or form.unpublished?
+    allow_view = !(form.nil? || form.unpublished?) || current_user.owner?(form)
+    redirect_to :root unless allow_view
   end
 
   def new

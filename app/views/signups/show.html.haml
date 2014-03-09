@@ -22,7 +22,7 @@
     - form.ordered_slots.each do |slot|
       %tr
         %td= slot.name
-        %td= slot.remaining
+        %td= slot.pretty_remaining
         %td
           - if slot.open?
             = link_to "Signup", new_signup_path(form, slot)

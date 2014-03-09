@@ -1,1 +1,13 @@
-You are invited!
+= simple_format @body
+
+%br
+%br
+= link_to "Click here to signup", signup_url(@form, host: "http://#{ENV.fetch('APP_DOMAIN')}")
+%br
+%br
+
+= "--"
+This signup form was created by
+= succeed '.' do
+  = link_to "SignupBuilder.com", 'http://www.signupbuilder.com'
+Use SignupBuilder.com to build your own signup for free today.
